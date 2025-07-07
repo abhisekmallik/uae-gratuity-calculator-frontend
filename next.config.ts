@@ -10,7 +10,23 @@ const nextConfig: NextConfig = {
   },
   images: {
     domains: ["localhost"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.vercel.app",
+      },
+    ],
   },
+  // Optimize for production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  // Enable experimental features for better performance
+  experimental: {
+    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+  },
+  // Production optimizations
+  swcMinify: true,
   // Optimize for better development experience
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer
@@ -35,7 +51,29 @@ const nextConfig: NextConfig = {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
         ],
+      },
+      {
+        source: "/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/en",
+        permanent: false,
       },
     ];
   },

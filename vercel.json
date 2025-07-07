@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "name": "uae-gratuity-calculator-frontend",
+  "alias": ["uae-gratuity-calculator.vercel.app"],
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_API_URL": "https://uae-gratuity-calculator-backend.vercel.app"
+    }
+  },
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://uae-gratuity-calculator-backend.vercel.app",
+    "NEXT_PUBLIC_SHOW_LANGUAGE_SWITCHER": "false",
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "app/**": {
+      "includeFiles": "messages/**"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/en",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
