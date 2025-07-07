@@ -1,0 +1,134 @@
+{
+  "app": {
+    "title": "UAE Gratuity Calculator",
+    "subtitle": "Calculate End of Service Benefits according to UAE Labor Law",
+    "description": "Accurate EOSB calculations with comprehensive breakdown and analysis"
+  },
+  "navigation": {
+    "calculator": "Calculator",
+    "about": "About",
+    "help": "Help"
+  },
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "languages": {
+    "en": "English",
+    "ar": "العربية"
+  },
+  "form": {
+    "title": "Employment Details",
+    "description": "Enter your employment information to calculate your End of Service Benefits",
+    "basicSalary": {
+      "label": "Basic Salary (AED)",
+      "placeholder": "Enter basic salary",
+      "description": "Monthly basic salary amount"
+    },
+    "terminationType": {
+      "label": "Termination Type",
+      "placeholder": "Select termination type",
+      "description": "How the employment ended"
+    },
+    "contractType": {
+      "label": "Contract Type",
+      "placeholder": "Select contract type",
+      "description": "Type of employment contract"
+    },
+    "joiningDate": {
+      "label": "Joining Date",
+      "placeholder": "Select joining date",
+      "description": "Date when employment started"
+    },
+    "lastWorkingDay": {
+      "label": "Last Working Day",
+      "placeholder": "Select last working day",
+      "description": "Date when employment ended"
+    },
+    "calculate": "Calculate EOSB",
+    "calculating": "Calculating...",
+    "clear": "Clear Form"
+  },
+  "results": {
+    "title": "EOSB Calculation Results",
+    "eligible": "Eligible for Gratuity",
+    "notEligible": "Not Eligible for Gratuity",
+    "totalAmount": "Total Gratuity Amount",
+    "servicePeriod": "Service Period",
+    "breakdown": "Calculation Breakdown",
+    "years": "years",
+    "months": "months",
+    "days": "days",
+    "firstFiveYears": "First 5 Years",
+    "additionalYears": "Additional Years",
+    "rate": "Rate",
+    "amount": "Amount",
+    "daysPerYear": "days per year",
+    "summary": {
+      "totalService": "Total Service",
+      "basicSalary": "Basic Salary",
+      "totalSalary": "Total Salary",
+      "eligibleYears": "Eligible Years",
+      "gratuityFormula": "Gratuity Formula",
+      "dailyWage": "Daily Wage",
+      "eligibleDays": "Eligible Days"
+    }
+  },
+  "calculation": {
+    "success": "Calculation completed successfully!"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidAmount": "Please enter a valid amount",
+    "invalidDate": "Please enter a valid date",
+    "joiningDateFuture": "Joining date cannot be in the future",
+    "lastWorkingDayBeforeJoining": "Last working day must be after joining date",
+    "apiError": "Failed to connect to server. Please try again.",
+    "calculationError": "Failed to calculate EOSB. Please check your inputs.",
+    "configError": "Failed to load configuration. Please refresh the page.",
+    "serverDown": {
+      "title": "Server Unavailable",
+      "description": "We're unable to connect to our servers at the moment.",
+      "checkConnection": "Please check your internet connection",
+      "tryAgainLater": "The service may be temporarily unavailable. Please try again in a few minutes.",
+      "retry": "Try Again",
+      "retrying": "Checking server...",
+      "goHome": "Go to Home",
+      "contactSupport": "If the problem persists, please contact support."
+    },
+    "networkError": "Network connection failed. Please check your internet connection.",
+    "timeout": "Request timed out. Please try again.",
+    "unexpectedError": "An unexpected error occurred. Please try again."
+  },
+  "loading": {
+    "configuration": "Loading configuration...",
+    "calculating": "Calculating EOSB...",
+    "general": "Loading..."
+  },
+  "about": {
+    "title": "About UAE EOSB Calculator",
+    "description": "This calculator implements the official UAE Labor Law Article 132 for End of Service Benefits calculation.",
+    "formula": {
+      "title": "Calculation Formula",
+      "description": "Gratuity = (Monthly Salary ÷ 30) × Eligible Days"
+    },
+    "rules": {
+      "title": "Calculation Rules",
+      "firstFive": "First 5 years: 21 days per year",
+      "afterFive": "After 5 years: 30 days per year",
+      "minimum": "Minimum service: 1 year (365 days)"
+    },
+    "penalties": {
+      "title": "Resignation Penalties (Unlimited Contracts Only)",
+      "lessThanOne": "< 1 year: No gratuity",
+      "oneToThree": "1-3 years: 1/3 of calculated gratuity",
+      "threeToFive": "3-5 years: 2/3 of calculated gratuity",
+      "fiveOrMore": "5+ years: Full gratuity"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "disclaimer": "This calculator is for informational purposes only. Consult with legal professionals for official calculations."
+  }
+}

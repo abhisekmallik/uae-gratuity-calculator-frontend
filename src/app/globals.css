@@ -1,26 +1,511 @@
+/* Critical hydration protection - must be early in CSS */
+[data-darkreader-inline-bgcolor],
+[data-darkreader-inline-color],
+[data-darkreader-inline-fill],
+[data-darkreader-inline-stroke],
+[data-darkreader-inline-border-top],
+[data-darkreader-inline-border-right],
+[data-darkreader-inline-border-bottom],
+[data-darkreader-inline-border-left] {
+  transition: none !important;
+}
+
+/* Ensure consistent styling for Lucide icons */
+.lucide {
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+/* Suppress browser extension style modifications during hydration */
+svg[data-darkreader-inline-stroke] {
+  stroke: currentColor !important;
+}
+
+svg[data-darkreader-inline-fill] {
+  fill: none !important;
+}
+
 @import "tailwindcss";
 
+/* RTL Support for Header - Only reverse logo icon position */
+html[dir="rtl"] .header-logo {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .header-logo {
+  flex-direction: row-reverse;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 0 0% 100%;
+  --foreground: 220 13% 13%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 13% 13%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 13% 13%;
+  --primary: 142 76% 36%;
+  --primary-foreground: 355 100% 97%;
+  --secondary: 220 14.3% 95.9%;
+  --secondary-foreground: 220 13% 13%;
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+  --accent: 220 14.3% 95.9%;
+  --accent-foreground: 220 13% 13%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 220 13% 75%;
+  --input: 220 13% 85%;
+  --ring: 142 76% 36%;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: 224 71.4% 4.1%;
+  --foreground: 210 20% 98%;
+  --card: 224 71.4% 4.1%;
+  --card-foreground: 210 20% 98%;
+  --popover: 224 71.4% 4.1%;
+  --popover-foreground: 210 20% 98%;
+  --primary: 142 86% 45%;
+  --primary-foreground: 220 13% 13%;
+  --secondary: 215 27.9% 16.9%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 215 27.9% 16.9%;
+  --muted-foreground: 217.9 10.6% 64.9%;
+  --accent: 215 27.9% 16.9%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 215 27.9% 30%;
+  --input: 215 27.9% 20%;
+  --ring: 142 86% 45%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* ========== RTL Support ========== */
+[dir="rtl"] {
+  --tw-space-x-reverse: 1;
+  text-align: right;
+  font-family: "Segoe UI", "Cairo", "Amiri", "Noto Sans Arabic",
+    "Arabic UI Text", Tahoma, Arial, sans-serif;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* RTL Text Alignment */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+[dir="rtl"] .text-center {
+  text-align: center;
+}
+
+/* RTL Flex Direction - CORRECTED: Only affect horizontal flex layouts, but exclude justify-between containers */
+[dir="rtl"] .flex:not(.flex-col):not(.flex-col-reverse):not(.justify-between) {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row;
+}
+
+/* RTL Spacing */
+[dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+/* RTL Margin utilities */
+[dir="rtl"] .mr-2 {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .ml-2 {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .mr-4 {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .ml-4 {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+/* RTL Padding utilities */
+[dir="rtl"] .pr-2 {
+  padding-left: 0.5rem;
+  padding-right: 0;
+}
+
+[dir="rtl"] .pl-2 {
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+
+[dir="rtl"] .pr-4 {
+  padding-left: 1rem;
+  padding-right: 0;
+}
+
+[dir="rtl"] .pl-4 {
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
+/* RTL Justify utilities - CORRECTED */
+[dir="rtl"] .justify-start {
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .justify-end {
+  justify-content: flex-start;
+}
+
+/* These should remain the same */
+[dir="rtl"] .justify-between {
+  justify-content: space-between;
+}
+
+[dir="rtl"] .justify-center {
+  justify-content: center;
+}
+
+[dir="rtl"] .items-center {
+  align-items: center;
+}
+
+[dir="rtl"] .items-start {
+  align-items: flex-start;
+}
+
+[dir="rtl"] .items-end {
+  align-items: flex-end;
+}
+
+/* RTL Form Controls */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] input[type="date"] {
+  direction: ltr;
+  text-align: left;
+}
+
+[dir="rtl"] input[type="number"] {
+  text-align: right;
+}
+
+[dir="rtl"] input[type="text"] {
+  text-align: right;
+}
+
+/* RTL Select Component */
+[dir="rtl"] [data-radix-select-trigger] {
+  text-align: right;
+  padding-left: 3rem;
+  padding-right: 0.75rem;
+}
+
+[dir="rtl"] [data-radix-select-trigger] svg {
+  left: 0.75rem;
+  right: auto;
+}
+
+[dir="rtl"] [data-radix-select-content] {
+  text-align: right;
+}
+
+[dir="rtl"] [data-radix-select-item] {
+  text-align: right;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+}
+
+[dir="rtl"] [data-radix-select-item] span[data-radix-select-item-indicator] {
+  left: auto;
+  right: 0.5rem;
+}
+
+[dir="rtl"] [data-radix-popper-content-wrapper] {
+  direction: rtl;
+}
+
+[dir="rtl"] .SelectTrigger {
+  text-align: right;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+}
+
+[dir="rtl"] .SelectTrigger svg {
+  left: 0.5rem;
+  right: auto;
+}
+
+/* Additional RTL Select Fixes */
+[dir="rtl"] [data-radix-select-trigger] > span {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] [data-radix-select-value] {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] [data-radix-select-item] [data-radix-select-item-text] {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Date Picker Styling */
+input[type="date"] {
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 2px;
+  margin-right: 4px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: hsl(var(--accent));
+  border-radius: 2px;
+}
+
+[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-right: 0;
+  margin-left: 4px;
+}
+
+/* ========== Select Dropdown Enhancements ========== */
+[data-radix-select-content] {
+  background-color: white !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid hsl(var(--border)) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  z-index: 9999 !important;
+}
+
+[data-radix-select-viewport] {
+  background-color: white !important;
+}
+
+.dark [data-radix-select-content] {
+  background-color: hsl(222.2, 84%, 4.9%) !important;
+  border-color: hsl(var(--border)) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark [data-radix-select-viewport] {
+  background-color: hsl(222.2, 84%, 4.9%) !important;
+}
+
+[data-radix-select-item] {
+  transition: all 0.2s ease;
+}
+
+[data-radix-select-item]:focus {
+  outline: none;
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+/* ========== Animations ========== */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-in-top {
+  animation: slide-in-from-top 0.3s ease-out;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-from-bottom 0.3s ease-out;
+}
+
+[dir="rtl"] .animate-slide-in {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+[dir="ltr"] .animate-slide-in {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+/* ========== Focus and Enhancement Styles ========== */
+.focus-visible:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+button {
+  font-weight: 500;
+}
+
+input,
+select,
+textarea {
+  font-weight: 500;
+}
+
+::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.8;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* ========== Custom Scrollbar ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
+
+/* ========== Print Styles ========== */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
 }
