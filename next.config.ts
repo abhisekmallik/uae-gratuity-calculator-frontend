@@ -25,8 +25,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
   },
-  // Production optimizations
-  swcMinify: true,
   // Optimize for better development experience
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer
