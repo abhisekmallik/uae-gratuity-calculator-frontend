@@ -50,11 +50,17 @@ const redirectToServerError = () => {
 // Request interceptor for logging
 apiClient.interceptors.request.use(
   (config) => {
-    console.log("API Request:", config.method?.toUpperCase(), config.url);
+    console.log("🚀 API Request:", {
+      method: config.method?.toUpperCase(),
+      url: config.url,
+      fullURL: `${config.baseURL}${config.url}`,
+      headers: config.headers,
+      data: config.data,
+    });
     return config;
   },
   (error) => {
-    console.error("API Request Error:", error);
+    console.error("❌ API Request Error:", error);
     return Promise.reject(error);
   }
 );
@@ -62,12 +68,22 @@ apiClient.interceptors.request.use(
 // Response interceptor for error handling
 apiClient.interceptors.response.use(
   (response) => {
+    console.log("✅ API Response:", {
+      status: response.status,
+      url: response.config.url,
+      data: response.data,
+    });
     // Reset server down status on successful response
     isServerDown = false;
     return response;
   },
   (error) => {
-    console.error("API Response Error:", error);
+    console.error("❌ API Response Error:", {
+      message: error.message,
+      status: error.response?.status,
+      url: error.config?.url,
+      data: error.response?.data,
+    });
 
     if (shouldRedirectToServerError(error)) {
       // Server is down, set flag and redirect
